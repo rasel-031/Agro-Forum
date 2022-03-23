@@ -1,0 +1,69 @@
+@import "../../styles/partials/font";
+@import "../../styles/mixins/flex";
+@import "../../styles/partials/responsive";
+@import "../../styles//mixins/button";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: #fff;
+  position: fixed;
+  z-index: 500;
+  width: 100%;
+  border-bottom: 1px solid black;
+
+  .navbar-container {
+    margin: 0vh 10vw;
+    padding: 12px 0px;
+    @include flex-box(row, center, space-between);
+
+    .navbar-heading-box {
+      @include flex-box(center, center);
+
+      .navbar-heading-image {
+        width: 50px;
+        height: 45px;
+      }
+      .navbar-heading-text {
+        font-family: $site-heading;
+        font-size: $site-font;
+        padding-left: 10px;
+      }
+    }
+    .navbar-right-content-box {
+      @include flex-box(row, center, space-between);
+      font-size: 14px;
+      width: 420px;
+      .navbar-link {
+        text-decoration: none;
+        color: black;
+      }
+      span {
+        cursor: pointer;
+      }
+      button {
+        @include primary-button;
+      }
+    }
+  }
+}
+//authentication css
+.navbar-authentication-container {
+  @include flex-box(row, center, center);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 600;
+  background-color: rgba(245, 245, 245, 0.8);
+}
+
+@media (max-width: $desktop-breakpoint) {
+}

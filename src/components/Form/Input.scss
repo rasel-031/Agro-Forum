@@ -1,0 +1,42 @@
+@import "../../styles/mixins/flex";
+@import "../../styles/partials/color";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.input-container {
+  @include flex-box(column);
+
+  .input-label {
+    span {
+      color: red;
+      font-size: 20px;
+    }
+  }
+  .input-field {
+    margin: 4px 0px;
+    padding: 8px 6px;
+    outline: none;
+
+    &:focus {
+      border: 1px solid $primary-color;
+      border-radius: 5px;
+      padding: 9px 7px;
+    }
+  }
+}
+
+.input-checkbox {
+  padding: 5px 0px 0px 0px;
+
+  input {
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
