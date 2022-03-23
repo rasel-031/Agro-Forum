@@ -1,73 +1,117 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "../../Form/Input.scss";
 import "./SignUp.scss";
+import { Form, Field } from "react-final-form";
+import {
+  required,
+  emailCheck,
+  composeValidators,
+  passwordCheck,
+} from "../../Form/FormValidation";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const formId = useRef(null);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    formData.append("name", formData.get("name"));
-    console.log(formData);
+  const onSubmit = (values) => {
+    console.log(values);
+
+    fetch("http://localhost:5000/user/signup", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .then((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div>
-      <form
-        className="signup-form-container"
-        onSubmit={handleSubmit}
-        ref={formId}
-      >
-        <div className="input-container">
-          <label htmlFor="" className="input-label">
-            Name
-            <span>*</span>
-          </label>
-          <input
-            type="text"
-            name="name"
-            className="input-field"
-            placeholder="Name"
-            required
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="" className="input-label">
-            Email
-            <span>*</span>
-          </label>
-          <input
-            type="text"
-            name="email"
-            className="input-field"
-            placeholder="Email"
-            required
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="" className="input-label">
-            Password
-            <span>*</span>
-          </label>
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            className="input-field"
-            placeholder="Password"
-            required
-          />
-        </div>
-        <div className="input-checkbox">
-          <input
-            type="checkbox"
-            onClick={() => setShowPassword(!showPassword)}
-          />
-          <span>&nbsp;Show password</span>
-        </div>
-        <br />
-        <button>Sign Up</button>
-      </form>
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit }) => (
+          <form className="signup-form-container" onSubmit={handleSubmit}>
+            <Field name="name" validate={required}>
+              {({ input, meta }) => (
+                <div className="input-container">
+                  <label htmlFor="" className="input-label">
+                    Name
+                    <span>*</span>
+                  </label>
+                  <input
+                    {...input}
+                    type="text"
+                    className="input-field"
+                    placeholder="Name"
+                  />
+                  {meta.error && meta.touched && (
+                    <span className="input-validate">{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+            <Field
+              name="email"
+              validate={composeValidators(required, emailCheck)}
+            >
+              {({ input, meta }) => (
+                <div className="input-container">
+                  <label htmlFor="" className="input-label">
+                    Email
+                    <span>*</span>
+                  </label>
+                  <input
+                    {...input}
+                    type="text"
+                    className="input-field"
+                    placeholder="Email"
+                  />
+                  {meta.error && meta.touched && (
+                    <span className="input-validate">{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+            <Field
+              name="password"
+              validate={composeValidators(required, passwordCheck)}
+            >
+              {({ input, meta }) => (
+                <div className="input-container">
+                  <label htmlFor="" className="input-label">
+                    Password
+                    <span>*</span>
+                  </label>
+                  <input
+                    {...input}
+                    type={showPassword ? "text" : "password"}
+                    className="input-field"
+                    placeholder="Password"
+                  />
+                  {meta.error && meta.touched && (
+                    <span className="input-validate">{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+            <div className="input-checkbox">
+              <Field
+                name="show-password"
+                component="input"
+                type="checkbox"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+              <span>&nbsp;Show password</span>
+            </div>
+            <br />
+            <button type="submit">Sign Up</button>
+          </form>
+        )}
+      />
     </div>
   );
 };
