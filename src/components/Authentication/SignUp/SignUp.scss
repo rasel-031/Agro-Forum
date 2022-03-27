@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .signup-form-container {
   button {
     @include primary-button(white, rgb(58, 139, 58));
