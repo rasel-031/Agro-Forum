@@ -8,20 +8,16 @@ import {
   composeValidators,
   passwordCheck,
 } from "../../Form/FormValidation";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerUserRequest } from "../../../redux/user/userActions";
-import { toast } from "react-toastify";
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userData.user);
 
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (values) => {
     dispatch(registerUserRequest(values));
-    toast.info(user.message);
-    toast.clearWaitingQueue();
   };
 
   return (

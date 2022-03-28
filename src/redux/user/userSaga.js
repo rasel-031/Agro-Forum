@@ -1,22 +1,50 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { toast } from "react-toastify";
+import { LOGIN_USER_REQUEST, REGISTER_USER_REQUEST } from "./userActionsType";
 
-import { REGISTER_USER_REQUEST } from "./userActionsType";
-
-import { registerUserFailure, registerUserSuccess } from "./userActions";
+import {
+  loginUserFailure,
+  loginUserSuccess,
+  registerUserFailure,
+  registerUserSuccess,
+} from "./userActions";
 
 import { userRegisterApi } from "./userRegisterApi";
+import { userLoginApi } from "./userLoginApi";
 
 //worker saga
 function* registerUserWorkerSaga(action) {
   try {
     const data = yield call(userRegisterApi, action.payload);
     yield put(registerUserSuccess(data));
+    //toastify
+    toast.success(data.message);
   } catch (error) {
-    yield put(registerUserFailure("Api data register failed!"));
+    //toastify
+    toast.error(error.response.data.message);
+    yield put(registerUserFailure(error.response.data));
+  } finally {
+    toast.clearWaitingQueue();
+  }
+}
+
+function* loginUserWorkerSaga(action) {
+  try {
+    const data = yield call(userLoginApi, action.payload);
+    yield put(loginUserSuccess(data));
+    //toastify
+    toast.success(data.message);
+  } catch (error) {
+    //toastify
+    toast.error(error.response.data.message);
+    yield put(loginUserFailure(error.response.data));
+  } finally {
+    toast.clearWaitingQueue();
   }
 }
 
 //watcher saga effects
-export function* registerUserWatcherSaga() {
-  yield takeEvery(REGISTER_USER_REQUEST, registerUserWorkerSaga);
+export function* UserWatcherSaga() {
+  yield takeLatest(REGISTER_USER_REQUEST, registerUserWorkerSaga);
+  yield takeLatest(LOGIN_USER_REQUEST, loginUserWorkerSaga);
 }

@@ -2,12 +2,14 @@ import {
   REGISTER_USER_FAILURE,
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
 } from "./userActionsType";
 
 export const registerUserRequest = (registerData) => {
   return {
     type: REGISTER_USER_REQUEST,
-    meta: "Regiseter data request",
     payload: registerData,
   };
 };
@@ -15,7 +17,6 @@ export const registerUserRequest = (registerData) => {
 export const registerUserSuccess = (data) => {
   return {
     type: REGISTER_USER_SUCCESS,
-    meta: "Register data success",
     payload: data,
   };
 };
@@ -23,7 +24,27 @@ export const registerUserSuccess = (data) => {
 export const registerUserFailure = (error) => {
   return {
     type: REGISTER_USER_FAILURE,
-    meta: "Register data failure",
-    payload: error,
+    error,
+  };
+};
+
+export const loginUserRequest = (loginData) => {
+  return {
+    type: LOGIN_USER_REQUEST,
+    payload: loginData,
+  };
+};
+
+export const loginUserSuccess = (data) => {
+  return {
+    type: LOGIN_USER_SUCCESS,
+    payload: data,
+  };
+};
+
+export const loginUserFailure = (error) => {
+  return {
+    type: LOGIN_USER_FAILURE,
+    error,
   };
 };

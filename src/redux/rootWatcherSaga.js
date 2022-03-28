@@ -1,6 +1,6 @@
-import { registerUserWatcherSaga } from "./user/userSaga";
+import { UserWatcherSaga } from "./user/userSaga";
 import { all, fork } from "redux-saga/effects";
 
 export function* rootWatcherSaga() {
-  yield all([fork(registerUserWatcherSaga)]);
+  yield all([fork(UserWatcherSaga)]);
 }
