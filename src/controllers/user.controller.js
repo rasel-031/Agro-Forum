@@ -15,15 +15,15 @@ export const userSignUp = async (req, res) => {
     //user validation check
     const isValidate = await userValidation(req.body);
     if (isValidate && isValidate.length > 0) {
-      return res.send(JSON.stringify(REGISTERED_EXIST));
+      return res.status(400).json(REGISTERED_EXIST);
     }
     //create new user
     const data = req.body;
     const user = new userModel(data);
     await user.save();
-    return res.send(JSON.stringify(REGISTERED_SUCCESS));
+    return res.status(200).json(REGISTERED_SUCCESS);
   } catch (error) {
-    return res.send(JSON.stringify(REGISTERED_FAILED));
+    return res.status(500).json(REGISTERED_FAILED);
   }
 };
 
@@ -36,7 +36,7 @@ export const userSignIn = async (req, res) => {
         req.body.password,
         isValidate[0].password
       );
-      if (!isValidPassword) return res.send(JSON.stringify(AUTH_FAILED));
+      if (!isValidPassword) return res.status(500).json(AUTH_FAILED);
       //authentication success
       const token = jwt.sign(
         {
@@ -47,9 +47,9 @@ export const userSignIn = async (req, res) => {
         process.env.JWT_SECRET_KEY,
         { expiresIn: "12h" }
       );
-      return res.send(JSON.stringify({ access_token: token, ...AUTH_SUCCESS }));
+      return res.status(200).json({ access_token: token, ...AUTH_SUCCESS });
     }
   } catch (error) {
-    return res.send(JSON.stringify(AUTH_FAILED));
+    return res.status(500).json(AUTH_FAILED);
   }
 };
