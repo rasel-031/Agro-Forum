@@ -7,18 +7,25 @@ import {
   required,
   emailCheck,
 } from "../../Form/FormValidation";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUserRequest } from "../../../redux/user/userActions";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userData.login);
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (values) => {
     dispatch(loginUserRequest(values));
   };
+
+  //navigate to protected page
+  if (user && user.success) {
+    navigate("/home");
+  }
 
   return (
     <div>

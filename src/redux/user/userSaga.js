@@ -1,7 +1,6 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { toast } from "react-toastify";
 import { LOGIN_USER_REQUEST, REGISTER_USER_REQUEST } from "./userActionsType";
-
 import {
   loginUserFailure,
   loginUserSuccess,
