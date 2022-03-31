@@ -5,6 +5,7 @@ import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
+  LOGOUT_USER_SUCCESS,
 } from "./userActionsType";
 
 export const registerUserRequest = (registerData) => {
@@ -46,5 +47,11 @@ export const loginUserFailure = (error) => {
   return {
     type: LOGIN_USER_FAILURE,
     error,
+  };
+};
+
+export const logoutUserSuccess = () => {
+  return {
+    type: LOGOUT_USER_SUCCESS,
   };
 };

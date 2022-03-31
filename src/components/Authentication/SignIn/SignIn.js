@@ -24,7 +24,7 @@ const SignIn = () => {
 
   //navigate to protected page
   if (user && user.success) {
-    navigate("/home");
+    navigate("/me");
   }
 
   return (

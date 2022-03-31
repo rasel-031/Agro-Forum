@@ -5,6 +5,7 @@ import {
   REGISTER_USER_FAILURE,
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
+  LOGOUT_USER_SUCCESS,
 } from "./userActionsType";
 
 const initialState = {
@@ -49,6 +50,13 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.error,
+      };
+    case LOGOUT_USER_SUCCESS:
+      return {
+        loading: false,
+        register: {},
+        login: {},
+        error: "",
       };
     default:
       return state;

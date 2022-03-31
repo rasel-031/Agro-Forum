@@ -1,0 +1,9 @@
+@import "../../styles//mixins/flex";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.protected-rotue-container {
+  @include flex-box();
+}

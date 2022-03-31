@@ -1,0 +1,99 @@
+@import "../../styles//mixins/flex";
+@import "../../styles//mixins/image";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sidebar-container {
+  height: 100vh;
+  @include flex-box(column, center, space-between);
+  padding: 40px 20px;
+  border-right: 1px solid rgb(192, 192, 192);
+
+  .sidebar-logo {
+    @include image(40px, 40px);
+  }
+  .sidebar-nav-link-box {
+    @include flex-box(column, stretch, space-between);
+
+    div {
+      padding: 16px 0px;
+
+      .link-active {
+        color: black;
+
+        .link-icon {
+          font-size: 24px;
+        }
+      }
+      .link-inactive {
+        color: rgb(126, 126, 126);
+
+        .link-icon {
+          font-size: 24px;
+        }
+
+        &:hover {
+          color: black;
+        }
+      }
+    }
+  }
+  .sidebar-profile-pic {
+    @include image(38px, 40px);
+    border-radius: 50px;
+    cursor: pointer;
+    border: 1px solid rgb(179, 179, 179);
+  }
+}
+.sidebar-profile-container {
+  background-color: rgb(233, 219, 219);
+  padding: 16px;
+  @include flex-box(column, stretch, space-between);
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1000;
+  left: 10px;
+  bottom: 98px;
+  width: 250px;
+
+  .profile-link {
+    padding: 6px;
+    text-decoration: none;
+    color: rgb(22, 22, 22);
+    font-size: 15px;
+
+    &:hover {
+      color: rgb(0, 17, 255);
+    }
+  }
+  .profile-horizontal {
+    padding: 10px 0px 16px 0px;
+  }
+  .profile-box {
+    @include flex-box(row, center);
+
+    .profile-pic {
+      @include image(35px, 33px);
+    }
+    .profile-text {
+      padding-left: 15px;
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    background-color: rgb(233, 219, 219);
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    z-index: -100;
+    bottom: -5px;
+    transform: rotate(45deg);
+  }
+}
