@@ -53,3 +53,11 @@ export const userSignIn = async (req, res) => {
     return res.status(500).json(AUTH_FAILED);
   }
 };
+
+export const userNewPost = (req, res) => {
+  const data = req.body;
+  const imageUrl = process.env.DOMAIN_URL + "storyUploads/" + req.file.filename;
+  console.log(data);
+  console.log(imageUrl);
+  res.send("OK");
+};

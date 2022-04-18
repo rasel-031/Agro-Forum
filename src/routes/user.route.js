@@ -1,12 +1,19 @@
 import express from "express";
 const userRouter = express.Router();
-import { userSignUp, userSignIn } from "../controllers/user.controller.js";
+import {
+  userSignUp,
+  userSignIn,
+  userNewPost,
+} from "../controllers/user.controller.js";
+import { postUploadFile } from "../middlewares/MulterErrorHandle.middleware.js";
 
-//json
+//json middleware
 userRouter.use(express.json());
 
 userRouter.post("/signup", userSignUp);
 
 userRouter.post("/signin", userSignIn);
+
+userRouter.post("/new-post", postUploadFile, userNewPost);
 
 export default userRouter;
