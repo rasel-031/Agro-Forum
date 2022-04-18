@@ -1,5 +1,6 @@
 @import "../../styles//mixins/flex";
 @import "../../styles//mixins/image";
+
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +12,8 @@
   @include flex-box(column, center, space-between);
   padding: 40px 20px;
   border-right: 1px solid rgb(192, 192, 192);
+  position: fixed;
+  z-index: 1000;
 
   .sidebar-logo {
     @include image(40px, 40px);

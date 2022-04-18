@@ -1,0 +1,107 @@
+@import "../../styles/partials/font";
+@import "../../styles/mixins/flex";
+@import "../../styles/mixins/image";
+@import "../../styles/mixins/button";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.write-container {
+  height: auto;
+  @include flex-box(column, stretch, flex-start);
+  margin: 70px 150px 70px 230px;
+  width: 100%;
+
+  .write-header {
+    @include flex-box(row, center, flex-start);
+    font-family: $popins;
+    color: black;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 6px 0px;
+  }
+  .write-form {
+    @include flex-box(column, stretch, center);
+
+    .textarea-wrap {
+      background: white;
+      display: table;
+      padding: 20px;
+      border: 1px dashed rgb(233, 233, 233);
+
+      .story-textarea {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        border: none;
+        display: inline-table;
+        height: auto;
+        width: 100%;
+        white-space: normal;
+        overflow: auto;
+        resize: none;
+        outline: none;
+        font-family: $popins;
+        color: black;
+        font-size: 18px;
+        font-weight: 900;
+      }
+      P {
+        color: red;
+        font-family: $popins;
+        font-size: 14px;
+        font-weight: 900;
+      }
+    }
+
+    .file-drop-area {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      border: 1px dashed rgb(233, 233, 233);
+
+      .file-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+
+        &:focus {
+          outline: none;
+        }
+      }
+      .file-btn {
+        font-family: $popins;
+        font-size: 18px;
+        font-weight: 900;
+      }
+    }
+    .file-upload {
+      border: 1px dashed rgb(233, 233, 233);
+      padding: 8px 20px;
+      @include flex-box(column, stretch, flex-start);
+      width: auto;
+
+      img {
+        @include image(300px, 500px);
+      }
+      button {
+        width: 100px;
+        @include primary-button();
+        margin: 8px 0px;
+      }
+    }
+    .write-form-submit {
+      @include primary-button();
+      width: 140px;
+    }
+  }
+}
